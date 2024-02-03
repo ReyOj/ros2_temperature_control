@@ -9,6 +9,8 @@ find_package(ament_cmake REQUIRED)
 find_package(rclcpp REQUIRED)
 find_package(std_msgs REQUIRED)
 
+set
+
 add_executable(temp src/temp.cpp)
 ament_target_dependencies(temp rclcpp std_msgs)
 

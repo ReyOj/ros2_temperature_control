@@ -15,7 +15,7 @@ public:
   Temperature()
   : Node("temperature")
   {
-    publisher_ = this->create_publisher<std_msgs::msg::Float32>("topic", 10);
+    publisher_ = this->create_publisher<std_msgs::msg::Float32>(this->get_parameter("topic_name").get_parameter_value().get<std::string>(), 10);
       timer_ = this->create_wall_timer(
       500ms, std::bind(&Temperature::timer_callback, this));
   }
@@ -23,7 +23,7 @@ public:
 private:
     void timer_callback()
     {
-      std::string fileName = "/sys/class/thermal/thermal_zone0/temp";
+      std::string fileName = this->get_parameter("path").get_parameter_value().get<std::string>();
       std::ifstream piCpuTempFile;
       float piCpuTemp = 0.0;
       std::stringstream buffer;
